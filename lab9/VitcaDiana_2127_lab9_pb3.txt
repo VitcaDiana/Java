@@ -1,0 +1,122 @@
+//Vitca Diana,grupa 2127,lab9_pb3
+/*Scrieti o clasa pentru determinarea unui element din sirul lui Fibonacci. In clasa vor fi 2 metode, una care calculeaza valoarea elementului si alta care afiseaza acea valoare. Folositi mecanismul de multithreading cu sincronizare, astfel incat in timp ce un fir de executie realizeaza calculul, celalalt sa afiseze valorile intermediare (toate componentele sirului pana la elementul calculat).*/
+
+package lab9_pb3;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s= new Scanner(System.in);
+		System.out.print("Introduceti numarul dorit din sirul Fibonacci: ");
+		int Nrdorit=s.nextInt();
+		s.close();
+		if(Nrdorit < 0) 
+			System.out.println("Numar gresit! Program incheiat   ");
+			else
+			{
+				try {
+					Thread fibonacciThread = new Thread(new Fibonacci(Nrdorit));
+					Thread iesireThread = new Clasa();
+
+					fibonacciThread.start();
+					iesireThread.start();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+	}
+
+
+
+package lab9_pb3;
+
+public class Fibonacci implements Runnable{
+	public static volatile int fn = 0; 
+	public static volatile boolean isPrinted = false;
+	boolean firstTime = true; 
+	int index;
+
+	public Fibonacci(int index) {
+		this.index = index;
+	}
+
+	
+	public void run() {
+		calculeazaNrdorit();
+	}
+
+	public synchronized void calculeazaNrdorit() {
+		if (index == 1) {
+			displayNumere(0);
+		} else if (index == 2) {
+			displayNumere(1);
+		} else {
+
+			if (firstTime) {
+				try {
+					Thread.sleep(500);
+					System.out.println(1);
+
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+			int n1 = 0, n2 = 1;
+			for (int i = 2; i < index; i++) {
+				isPrinted = false;
+				fn = n1 + n2;
+				n1 = n2;
+				n2 = fn;
+
+				while (!isPrinted) {
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+
+			}
+			displayNumere(fn);
+		}
+
+	}
+
+	public void displayNumere(int n) {
+		System.out.println("Numarul ales este: " + n);
+	}
+
+}
+
+
+
+
+
+package lab9_pb3;
+
+public class Clasa extends Thread {
+
+	public Clasa() {
+		setDaemon(true);
+	}
+
+	
+	public void run() {
+		while (true) {
+			while (Fibonacci.isPrinted) {
+				try {
+					Thread.sleep(500);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println(Fibonacci.fn);
+			Fibonacci.isPrinted = true;
+		}
+	}
+}

@@ -1,0 +1,65 @@
+//Vitca Diana,grupa 2127,lab11_pb1
+/*Implementați o aplicație Java care folosește GridLayout pentru aranjarea în pagină a componentelor unei aplicații de calcul (TextField pt. intrare/ieșire, butoane pentru numere, operații matematice, ștergerea ecranului, etc.).*/
+
+package lab11_pb1;
+
+public class Main {
+
+	public static void main(String[] args) {
+		new GridCalculator();
+
+	}
+
+}
+
+
+
+package lab11_pb1;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+public class GridCalculator {
+	JFrame frame;
+	
+	public GridCalculator() {
+		init();
+	}
+	
+	public void init() {
+		frame= new JFrame("GridLayout");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(500,500);
+		
+		GridLayout grid= new GridLayout(5,3,10,10);
+		
+		frame.setLayout(grid);
+		JTextArea text= new JTextArea();
+		text.setText("Rezultat: ");
+		text.setEditable(false);
+		frame.add(text);
+		
+		addOperatii();
+		addNumere();
+		frame.setVisible(true);
+	}
+	
+	private void addNumere() {
+		JButton[] arraybuton= new JButton[10];
+		for(int i=0;i<arraybuton.length;i++) {
+			arraybuton[i] =new JButton(Integer.toString(i));
+			frame.add(arraybuton[i]);
+		}
+	}
+	
+	private void addOperatii() {
+		frame.add(new JButton ("-"));
+		frame.add(new JButton ("+"));
+		frame.add(new JButton ("="));
+		frame.add(new JButton ("<-"));
+		
+	}
+	
+
+}

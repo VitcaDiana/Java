@@ -1,0 +1,100 @@
+//Vitca Diana,grupa 2127,lab11_pb4
+/*Creați o aplicație ce preia din două câmpuri text (TextField) numele vostru și grupa din care faceți parte și afișează această informație într-o etichetă de culoare RGB (122,123,129).*/
+
+package lab11_pb4;
+
+public class Main {
+	public static void main(String[] args) {
+		 DateRGB aplicatie = new  DateRGB();
+		aplicatie.setVisible(true);
+	}
+}
+
+
+
+package lab11_pb4;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+
+public class DateRGB extends JFrame {
+	private JTextField leftTextField;
+	private JTextField rightTextField;
+	private JLabel label;
+	JButton resultButton;
+
+	private static final long serialVersionUID = 1L; 
+
+	public DateRGB() {
+		init();
+	}
+
+	private void init() {
+		setSize(new Dimension(350, 450));
+		setTitle("Informatii nume si grupa");
+		setBackground(Color.GREEN);
+		setLayout(null);
+
+		leftTextField = new JTextField("Nume");
+		leftTextField.setBounds(50, 25, 230, 30);
+		leftTextField.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) { 
+				if (leftTextField.getText().equals("Nume"))
+					leftTextField.setText("");
+			}
+
+			public void mouseExited(MouseEvent e) {
+				if (leftTextField.getText().trim().length() == 0) {
+					leftTextField.setText("Nume");
+				}
+			}
+		});
+		add(leftTextField);
+
+		rightTextField = new JTextField("Grupa");
+		rightTextField.setBounds(50, 55, 230, 30);
+		rightTextField.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (rightTextField.getText().equals("Grupa"))
+					rightTextField.setText("");
+			}
+
+			public void mouseExited(MouseEvent e) {
+				if (rightTextField.getText().trim().length() == 0) {
+					rightTextField.setText("Grupa");
+				}
+			}
+		});
+		add(rightTextField);
+
+		label = new JLabel("Asteptam sa introduceti datele", SwingConstants.CENTER);
+		label.setBounds(35, 225, 250, 30);
+		add(label);
+
+		resultButton = new JButton("Rezultat");
+		resultButton.setBounds(115, 350, 100, 30);
+		add(resultButton);
+
+		resultButton.addActionListener(e -> handle(e));
+		setVisible(true);
+	}
+
+	private void handle(ActionEvent e) {
+		String nume = leftTextField.getText();
+		String grupa = rightTextField.getText();
+
+		if ((nume.equals("Nume") || grupa.equals("Grupa"))) { 
+			label.setForeground(Color.red);
+			label.setText("Incorect!");
+		} else if (nume.trim().length() == 0 || grupa.trim().length() == 0) { 
+			label.setForeground(Color.red);
+			label.setText("Adaugati numele si grupa ");
+		} else { 
+			label.setForeground(new Color(122, 12, 129));
+			label.setText(nume + " este din grupa: " + grupa);
+		}
+	}
+}

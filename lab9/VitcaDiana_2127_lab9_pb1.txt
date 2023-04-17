@@ -1,0 +1,49 @@
+//Vitca Diana,grupa 2127,lab9_pb1
+ /* Să se creeze o aplicație Java în cadrul căreia există o clasă ce implementează interfața Runnable. Constructorul clasei permite definirea unui nume asociat fiecărui obiect instanțiat din clasa respectivă și de asemenea clasa are un atribut static ce contorizează numărul de obiecte instanțiate. Metoda run( ) a clasei va afișa numele obiectului de un număr de ori egal cu valoarea contorului și cu o întârziere de 1000 msec între afișări.*/
+package lab9_pb1;
+import java.util.Scanner;
+public class Main {
+
+        public static void main(String[] args) {
+        
+           Scanner s=new Scanner(System.in);
+           System.out.print("Introduceti un nume: ");
+           String str=s.next();
+           Thread str1 =new Thread(new MyRunnable(str));
+           System.out.print("Introduceti un nume: ");
+           str=s.next();
+           Thread str2 =new Thread(new MyRunnable(str));
+           System.out.print("Introduceti un nume: ");
+           str=s.next();
+           Thread str3 =new Thread(new MyRunnable(str));
+           str1.start();
+           str2.start();
+           str3.start();
+        }
+
+}
+
+
+
+package lab9_pb1;
+
+public class MyRunnable implements Runnable{
+        String nume;
+        static int contor=0;
+        public  MyRunnable(String nume){
+                this.nume=nume;
+                contor++;
+        }
+        public void run() {
+                for(int i=0;i<contor;i++)
+                {
+                        try {
+                                System.out.println(nume);
+                                Thread.sleep(1000);
+                                
+                        } catch(InterruptedException e) {
+                                e.printStackTrace();
+                        }
+                }
+        }
+}

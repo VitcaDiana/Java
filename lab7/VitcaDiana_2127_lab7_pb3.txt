@@ -1,0 +1,211 @@
+//Vitca Diana,grupa 2127,lab7-pb3
+/*Implementați o aplicație în cadrul căreia să aveți o clasă SetterGetter generică ce permite setarea și returnarea valorilor atributelor pentru mai multe
+* tipuri de obiecte. De exemplu, având clasele Copil, Adult și Pensionar, să se poată seta și returna numele și vârsta acestora. Creați colecții cu 
+*intrări unice de obiecte de tip Copil, Adult, Pensionar pe care să le populați cu date citite din consolă. Afișați datele preluate în diferite moduri.*/
+
+package lab7_pb3;
+import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+	private static Scanner s=new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Set<Copil> copil = addCopil();
+		Set<Adult> adult=addAdult();
+		Set<Pensionar> pensionar=addPensionar();
+		System.out.println("Grupul de persoane sunt: ");
+		show(copil);
+		show(adult);
+		show(pensionar);
+    
+	}
+	private static Set<Copil> addCopil() {
+		try {
+			System.out.print("Introduceti numarul de copii: ");
+			int nr=s.nextInt();
+			if(nr==0) {
+				return null;
+			}
+			SetterGetter ob=new SetterGetter();
+			
+			Set<Copil> copil=new HashSet<>();
+			System.out.println(" Introduceti numele si varsta: ");
+			String nume;
+			int varsta;
+			for(int i=0;i<nr;i++) {
+				System.out.print("\nCopilul[ "+(i+1)+ "]\nNume: ");
+				nume=s.next();
+				System.out.print("\nVarsta: ");
+				varsta=s.nextInt();
+				Copil a=new Copil();
+				ob.setVarsta(a, varsta);
+				ob.setNume(a, nume);
+				copil.add(a);
+			}
+			return copil;
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	private static Set<Adult> addAdult() {
+		try {
+			System.out.print("\nIntroduceti numarul de adulti: ");
+			int nr=s.nextInt();
+			if(nr==0) {
+				return null;
+			}
+			SetterGetter ob=new SetterGetter();
+			
+			Set<Adult> adult=new HashSet<>();
+			System.out.println(" Introduceti numele si varsta: ");
+			String nume;
+			int varsta;
+			for(int i=0;i<nr;i++) {
+				System.out.print("\nAdultul[ "+(i+1)+ "]\nNume: ");
+				nume=s.next();
+				System.out.print("\nVarsta: ");
+				varsta=s.nextInt();
+				Adult a=new Adult();
+				ob.setVarsta(a, varsta);
+				ob.setNume(a, nume);
+				adult.add(a);	
+		}
+			return adult;
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	}
+		return null;
+}
+	private static Set<Pensionar> addPensionar() {
+		try {
+			System.out.print("\nIntroduceti numarul de pensionari: ");
+			int nr=s.nextInt();
+			if(nr==0) {
+				return null;
+			}
+			SetterGetter ob=new SetterGetter();
+			
+			Set<Pensionar> pensionar=new HashSet<>();
+			System.out.println(" Introduceti numele si varsta: ");
+			String nume;
+			int varsta;
+			for(int i=0;i<nr;i++) {
+				System.out.print("\nPensionarul[ "+(i+1)+ "]\nNume: ");
+				nume=s.next();
+				System.out.print("\nVarsta: ");
+				varsta=s.nextInt();
+				Pensionar a=new Pensionar();
+				ob.setVarsta(a, varsta);
+				ob.setNume(a, nume);
+				pensionar.add(a);	
+		}
+			return pensionar;
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	}
+		return null;
+	}
+	
+	private static void show(Set <? extends Om> set) {
+		if(set instanceof Copil)
+			System.out.println("Copii care sunt in baza de date:");
+		else if(set instanceof Adult)
+			System.out.println("\nAdultii care sunt in baza de date:");
+		else if(set instanceof Pensionar)
+			System.out.println("\nPensionarii care sunt in baza de date:");
+		try {
+			if(set.size()==0)
+				throw new Exception("NULL");
+			SetterGetter ob=new SetterGetter();
+			for(Om instanceOfSet: set) {
+				System.out.println("\nNume: "+ ob.getNume(instanceOfSet));
+				System.out.println("\nVarsta: "+ob.getVarsta(instanceOfSet));
+				
+			}
+		}catch (Exception e) {
+			System.out.println("\nEroare!");
+		}
+	}
+}
+
+			
+			
+	
+package lab7_pb3;
+
+public class SetterGetter <T extends Om> {
+	void setNume(T ob,String nume) {
+		ob.nume=nume;
+	}
+	String getNume(T ob) {
+		return ob.nume;
+	}
+	void setVarsta(T ob,int varsta) {
+		ob.varsta=varsta;
+	}
+	int getVarsta(T ob) {
+		return ob.varsta;
+	}
+
+}
+
+
+
+package lab7_pb3;
+
+public class Om {
+	protected String nume;
+	protected int varsta;
+	
+	public Om() {}
+	
+	public Om(String nume,int varsta) {
+		this.nume=nume;
+		this.varsta=varsta;
+	}
+
+}
+
+
+
+package lab7_pb3;
+
+public class Copil extends Om {
+    public Copil() {}
+
+    public Copil(String nume, int varsta) {
+        super(nume, varsta);
+    }
+}
+
+
+package lab7_pb3;
+
+public class Adult extends Om {
+	
+	public Adult() {}
+	public Adult(String nume,int varsta) {
+		super(nume,varsta);
+	}
+
+}
+
+
+package lab7_pb3;
+
+public class Pensionar extends Om {
+	public Pensionar() {}
+	public Pensionar (String nume,int varsta) {
+		super(nume,varsta);
+	}
+
+}
+
+
+
+
+	

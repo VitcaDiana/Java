@@ -1,0 +1,34 @@
+//Vitca Diana,grupa 2127,lab8_pb1
+/*Folosind mecanismul preluării datelor de la tastatură cu un BufferedReader și InputStreamReader, preluați: un mesaj de tip String, ziua ca intreg, luna de tip String si anul ca un întreg. Procesul se va încheia în momentul trecerii la o nouă linie, când se va afișa fiecare câmp pe o linie separată. Afisati de asemenea toate campurile in ordinea in care au aparut.
+*Recomandare: Folosiți clasa StreamTokenizer, atributele sval, nval respectiv constanta TT_EOL.
+*Considerați și cazul în care nu cunoașteți natura câmpurilor introduse (numeric, cuvânt) folosind constantele TT_NUMBER, TT_WORD.*/
+
+package lab8_pb1;
+import java.io.*;
+import static java.io.StreamTokenizer.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		BufferedReader obiect=new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer streamtok=new StreamTokenizer(obiect);
+		
+		streamtok.eolIsSignificant(true);
+		try {
+			System.out.print("Introduceti o valoare: ");
+			while(streamtok.nextToken()!=TT_EOF)
+				if(streamtok.ttype ==TT_WORD) {
+					System.out.println(" Sir: " +streamtok.sval);
+					} else if(streamtok.ttype ==TT_NUMBER) {
+						System.out.println("Numar: "+(int)streamtok.nval);
+					} else if(streamtok.ttype ==TT_EOL) {
+						System.out.println(" EOL ");
+						break;
+					}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

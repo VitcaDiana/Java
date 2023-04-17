@@ -1,0 +1,55 @@
+//Vitca Diana grupa 2127 lab5_pb1''
+/*Folosiți structura de la 1’ și implementați expresii lambda pentru definirea operațiilor
+* aritmetice. Verificați funcționalitatea.*/
+package lab5_pb1_3;
+
+import java.util.Scanner;
+import java.lang.Math;
+
+
+
+public class Main {
+	private static Scanner s=new Scanner(System.in);
+	  
+
+	interface DoubleMath{
+		double operatie(double m,double n);
+	}
+  
+	public double operateUnary(double x,double y,DoubleMath op) {
+		return op.operatie(x,y);
+	}	
+ 
+	public static void main(String... args) {
+		
+		double a,b;
+		System.out.print("Introduceti doua numere: ");
+		a=s.nextDouble();
+		b=s.nextDouble();
+		Main lambda=new Main();
+    
+		DoubleMath adunare=(x,y) -> x+y;
+		DoubleMath scadere=(x,y) -> x-y;
+		DoubleMath inmultire=(x,y) -> x*y;
+		DoubleMath impartire=(x,y) -> x/y;
+		DoubleMath putere=(x,y) -> Math.pow(x, y);
+		DoubleMath radical=(x,y) -> Math.pow(y,1/x);
+		
+		System.out.println("Suma numerelor este: " + lambda.operateUnary(a, b, adunare));
+		
+		System.out.println("Diferenta numerelor este: " + lambda.operateUnary(a, b, scadere));
+		
+		System.out.println("Produsul numerelor este: " + lambda.operateUnary(a, b, inmultire));
+		
+		System.out.println("Catul numerelor este: " + lambda.operateUnary(a, b, impartire));
+		
+		System.out.println("A la puterea B  este: " + lambda.operateUnary(a, b, putere));
+		
+		System.out.println("Radical de ordin A din B este: " + lambda.operateUnary(a, b, radical));
+		
+		
+		
+		
+
+	}
+}

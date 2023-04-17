@@ -1,0 +1,66 @@
+//Vitca Diana grupa 2127 lab5_pb1'
+/*În loc de o interfață care conține toate metodele menționate anterior, să se implementeze
+* 4 interfețe funcționale, câte una pentru fiecare metodă.
+*Interfețele vor fi implementate în cadrul unei singure clase. Instanțiați clasa și 
+*verificați operațiile implementate */
+package lab5_pb1;
+import java.util.Scanner;
+public class Clasa {
+	
+	static Scanner s=new Scanner(System.in);
+
+	public static void main(String[] args) {
+		
+		System.out.println("Introduceti doua numere: ");
+		double x,y;
+		x=s.nextDouble();
+		y=s.nextDouble();
+		Adunare adunare=(double n1,double n2) -> (n1+n2);
+		Scadere scadere=(double n1,double n2) -> (n1-n2);
+		Inmultire inmultire=(double n1,double n2) -> (n1*n2);
+		Impartire impartire=(double n1,double n2) -> (n1/n2);
+		
+		System.out.print("\nSuma numerelor este: " +adunare.operatie(x,y));
+		System.out.print("\nDiferenta numerelor este: " +scadere.operatie(x,y));
+		System.out.print("\nProdusul numerelor este: " +inmultire.operatie(x,y));
+		System.out.print("\nCatul numerelor este: " +impartire.operatie(x,y));
+		
+		
+
+	}
+
+}
+
+
+package lab5_pb1;
+
+public interface Adunare {
+	public double operatie(double x,double y);
+
+}
+
+package lab5_pb1;
+
+public interface Scadere {
+	public double operatie(double x,double y);
+
+
+}
+
+
+package lab5_pb1;
+
+public interface Inmultire {
+	public double operatie(double x,double y);
+
+
+}
+
+
+package lab5_pb1;
+
+public interface Impartire {
+	public double operatie(double x,double y);
+
+
+}

@@ -1,0 +1,75 @@
+//Vitca Diana,grupa 2127,lab9_pb2
+/*Scrieti o aplicatie Java in care un fir de executie genereaza 30 numere aleatoare intre 0 si 30 si un alt fir de executie afiseaza aria cercului cu raza generata de primul fir de executie, daca aceasta raza este divizibila cu 3.*/
+
+package lab9_pb2;
+
+public class Main {
+
+	public static void main(String[] args) {
+		try {
+			Numar nr= new Numar();
+			Thread nThread= new Thread(nr);
+			nThread.start();
+			Cerc c= new Cerc(nr);
+			Thread cThread= new Thread(c);
+			cThread.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}
+
+
+package lab9_pb2;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Numar implements Runnable {
+	int [] numere= new int[30];
+	public Numar() {} 
+	
+	public void run() {
+		generareNumere();
+		displayNumere();
+	}
+	public void generareNumere() {
+		Random r=new Random();
+		for(int i=0;i<30;i++) {
+			numere[i]=r.nextInt(30)+1;
+		}
+	}
+	public void displayNumere() {
+		System.out.println("Sir: " + Arrays.toString(numere));
+	}
+
+}
+
+
+
+
+package lab9_pb2;
+
+public class Cerc implements Runnable {
+	Numar nr;
+	public Cerc(Numar nr) {
+		this.nr=nr;
+	}
+	public void calculArie(int[] array) {
+		int nrCercuri=0;
+		for(int i=0;i<array.length;i++) {
+			if(array[i] % 3 ==0) {
+				nrCercuri++;
+				System.out.print("\nCercul[" + nrCercuri + "] are aria: " + Math.PI* Math.pow(array[i], 2));
+			}
+		}
+	}
+	public void run()  {
+	calculArie(nr.numere);
+	}
+
+}
+
+

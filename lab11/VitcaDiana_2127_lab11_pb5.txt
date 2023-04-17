@@ -1,0 +1,97 @@
+//Vitca Diana,grupa 2127,lab11_pb5
+/*Implementați o aplicație grafică în care utilizatorul poate scrie (în componente de tip TextField) cantitățile R, G, B ale unei culori. După apăsarea unui buton, o componentă de tip Label va afișa un text care reprezintă cantitățile specificate, cu culoarea rezultată, dacă valorile sunt corecte (numerice, între 0-255). În caz contrar, eticheta va afișa cu roșu un mesaj de eroare. Încercați să folosiți excepții pentru verificarea valorilor.*/
+
+package lab11_pb5;
+
+public class Main {
+	public static void main(String[] args) {
+		new Date();
+	}
+}
+
+
+package lab11_pb5;
+
+public class RGB extends Exception {
+	
+	private static final long serialVersionUID = 1L;
+
+	public RGB(String mesaj) {
+		super(mesaj);
+	}
+}
+
+
+package lab11_pb5;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+
+public class Date extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	private JTextField jTextField1;
+	private JTextField jTextField2;
+	private JTextField jTextField3;
+	private JLabel label;
+	private JButton button;
+
+	public Date() {
+		init();
+	}
+
+	public void init() {
+		setSize(new Dimension(400, 200));
+		setTitle("RGB");
+		setLayout(null);
+
+		JLabel rl = new JLabel("Introduceti culorile RGB (0-255,0-255,0-255)");
+		rl.setBounds(80, 5, 270, 30);
+		add(rl);
+
+		jTextField1 = new JTextField("ROSU");
+		jTextField1.setBounds(50, 40, 100, 30);
+		add(jTextField1);
+
+		jTextField2 = new JTextField("VERDE");
+		jTextField2.setBounds(50, 70, 100, 30);
+		add(jTextField2);
+
+		jTextField3 = new JTextField("ALBASTRU");
+		jTextField3.setBounds(50, 100, 100, 30);
+		add(jTextField3);
+
+		button = new JButton("Rezultat: ");
+		button.setBounds(50, 140, 100, 30);
+		add(button);
+
+		label = new JLabel("Rezultat");
+		label.setBounds(200, 140, 150, 30);
+		add(label);
+
+		button.addActionListener(e -> actionPerformed(e));
+		setVisible(true);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		try {
+			String valoareRosu = jTextField1.getText();
+			String valoareVerde = jTextField2.getText();
+			String valoareAlbastru = jTextField3.getText();
+
+			if ((Integer.parseInt(valoareRosu) < 0) || (Integer.parseInt(valoareRosu) > 255)
+					|| (Integer.parseInt(valoareVerde) < 0) || (Integer.parseInt(valoareVerde) > 255)
+					|| (Integer.parseInt(valoareAlbastru) < 0) || (Integer.parseInt(valoareAlbastru) > 255))
+				throw new RGB("Valoarea a fost aleasa gresit");
+
+			label.setText(valoareRosu + " " + valoareVerde + " " + valoareAlbastru);
+			label.setForeground(
+					new Color(Integer.parseInt(valoareRosu), Integer.parseInt(valoareVerde), Integer.parseInt(valoareAlbastru)));
+		} catch (RGB ex) {
+			label.setText("Una sau mai multe valri incorecte");
+			label.setForeground(Color.RED);
+		}
+	}
+}

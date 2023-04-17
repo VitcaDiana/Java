@@ -1,0 +1,132 @@
+//Vitca Diana,frupa 2127,lab7_pb5
+/*Scrieti o clasa Student cu campurile private nume, grupa, media, si metode getter/setter pentru campuri. In main(), plasata in alta clasa, creati o 
+*colectie de tip SortedSet, cu obiecte de tip Student, initializate cu valori citite de la tastatura, care sa pastreze elementele descrescator dupa medie
+* si crescator dupa nume (cei care au aceeasi medie sa fie in ordine alfabetica). Parcurgeti cu for-loop colectia si afisati toate elementele. Parcurgeti 
+*apoi colectia cu un iterator si afisati toti studentii cu media >=8. Parcurgeti colectia cu forEach() si afisati toate datele studentilor dintr-o anumita
+ grupa.*/
+
+package lab7_pb5;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class Main {
+	static Scanner s=new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Set<Student> studenti=addStudent();
+		show (studenti);
+	
+	}
+	
+	private static Set<Student> addStudent() {
+		try {
+			System.out.print("Introduceti numarul de studenti: ");
+			int nr=s.nextInt();
+			if(nr==0)
+				return null;
+		
+		Set<Student> st=new HashSet<>();
+		System.out.println("Introduceti numele,grupa si media: ");
+		String nume;
+		int grupa;
+		double medie;
+		for(int i=0;i<nr;i++) {
+			System.out.print("\nStudentul[ " +(i+1)+"]\nNume: ");
+			nume=s.next();
+			System.out.print("\nGrupa: ");
+			grupa=s.nextInt();
+			System.out.print("\nMedia: ");
+			medie=s.nextDouble();
+			Student a=new Student();
+			a.setNume(nume);
+			a.setGrupa(grupa);
+			a.setMedie(medie);
+			st.add(a);
+		}
+		return st;
+	
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	}
+	return null;
+
+}
+
+private static void show(Set<Student> set) {
+	try {
+		if(set.size()==0)
+			throw new Exception("Fara studenti");
+		for(Student i:set) {
+			System.out.println("\nNume: " +i.getNume());
+			System.out.println("\nGrupa: " +i.getGrupa());
+			System.out.println("\nMedia: " +i.getMedie());
+		}
+		Iterator<Student> itr=set.iterator();
+		System.out.println("\nStudentii cu media >=8: ");
+		while(itr.hasNext()) {
+			Student z=itr.next();
+			if(z.getMedie() >=8) {
+				System.out.println(z.getNume()+" ");
+			}
+		}
+		System.out.println("\n\n Studenti care sunt dintr-o anumita grupa: ");
+		set.forEach((n) -> 
+		{
+		if(n.getGrupa()==2022)
+			System.out.print(n.getNume()+ " ");
+	});
+	
+} catch (Exception ex) {
+	 	ex.printStackTrace();
+}
+}
+}
+	
+
+
+
+package lab7_pb5;
+
+public class Student implements Comparable<Student> {
+	private String nume;
+	private int grupa;
+	private double medie;
+	public Student() {}
+	
+	public Student(String nume,int grupa,double medie) {
+		this.nume=nume;
+		this.grupa=grupa;
+		this.medie=medie;
+	}
+	public String getNume() {
+		return nume;
+	}
+	public void setNume(String nume) {
+		this.nume=nume;
+	}
+	public int getGrupa() {
+		return grupa;
+	}
+	public void setGrupa(int grupa) {
+		this.grupa=grupa;
+	}
+	public double getMedie() {
+		return medie;
+	}
+	public void setMedie(double medie) {
+		this.medie=medie;
+	}
+	public int compareTo(Student b) {
+		if(this.getMedie() != b.getMedie())
+		{
+			return (int) (b.getMedie()-this.getMedie());
+		}
+		else
+		{
+			return b.getNume().compareTo(this.getNume());
+		}
+	}
+
+}

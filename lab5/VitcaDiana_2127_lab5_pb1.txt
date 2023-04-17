@@ -1,0 +1,77 @@
+//Vitca Diana lab7_pb1
+/*Să se implementeze o interfață Java care conține prototipurile metodelor de adunare, 
+*scădere, înmulțire, împărțire,radical și ridicare la putere. Toate metodele vor avea doi
+* parametri de tip double și vor specifica tipul returnat double.
+*Implementați interfața astfel încât operațiile să fie definite în cadrul unei clase. 
+*Instanțiați clasa și verificați operațiile implementate. */
+package lab5_pb01;
+import java.util.Scanner;
+
+public class Main {
+	
+	private static Scanner s=new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		
+		double x,y;
+		System.out.print("\nIntroduceti doua numere: ");
+		x=s.nextDouble();
+		y=s.nextDouble();
+		Nr ob=new Nr();
+		System.out.print("\nSuma numerelor este: " +ob.adunare(x,y));
+		System.out.print("\nDiferenta numerelor este: " +ob.scadere(x,y));
+		System.out.print("\nProdusul numerelor este: " +ob.inmultire(x,y));
+		System.out.print("\nCatul numerelor este: " +ob.impartire(x,y));
+		System.out.print("\nA la puterea B este: "+ob.putere(x,y));
+		System.out.print("\nRadical de ordinul a din b este: " +ob.radical(x,y));
+	}
+	
+	
+
+}
+
+
+package lab5_pb01;
+import java.lang.Math;
+public class Nr implements Calc{
+	public double adunare(double x,double y)
+	{
+		return x+y;
+	}
+	public double scadere(double x,double y)
+	{
+		return x-y;
+	}
+	public double inmultire(double x,double y)
+	{
+		return x*y;
+	}
+	public double impartire(double x,double y)
+	{
+		return x/y;
+	}
+	public double putere(double x,double y)
+	{
+		return Math.pow(x, y);
+	}
+	public double radical(double x,double y)
+	{
+		return Math.pow(y,1/x);
+	}
+}
+
+
+
+
+package lab5_pb01;
+
+
+public interface Calc {
+	public double adunare(double x,double y);
+	public double scadere(double x,double y);
+	public double inmultire(double x,double y);
+	public double impartire(double x,double y);
+	public double putere(double x,double y);
+	public double radical(double x,double y);
+
+}

@@ -1,0 +1,220 @@
+//Vitca Diana grupa 2127 lab5_pb2
+/*Definiți o interfață denumită FormaGeometrica care are 2 metode care primesc ca parametru o
+* valoare integer și returnează o valoare double reprezentînd aria, respectiv perimetrul
+* unei forme geometrice echilaterale.
+*Implementați interfața în 3 clase distincte pentru forme concrete de tip pătrat,
+* triunghi echilateral și hexagon regulat.
+*Se preiau datele pentru un număr N de forme geometrice de fiecare tip.
+*Să se calculeze aria și perimetrul total al formelor geometrice, ținând cont că acestea 
+*nu se suprapun*/
+
+package lab5_pb2;
+import java.util.Scanner;
+
+public class Clasa1 {
+	
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		System.out.println("Numarul formelor geometrice adaugate: ");
+        int nr = s.nextInt();
+        Figuri ob = new Figuri();
+        ob.read(nr);
+        ob.display();
+
+
+	}
+
+}
+
+
+package lab5_pb2;
+
+public interface FormaGeometrica {
+	
+	 default double ariaPatrat(double l) {
+	        return l*l;
+	    }
+	    default double perimetruPatrat(double l){
+	        return 4*(l);
+	    }
+
+	    
+	    default double ariaTriunghiEchil(double l) {
+	        return l*Math.sqrt(3)/4;
+	    }
+
+	    default double perimetruTriunghiEchil(double l) {
+	        return 3*l;
+	    }
+	    
+	    default double ariaHexagon(double l) {
+	        return (6*(l*l))/(4*Math.tan(Math.PI/6));
+	    }
+
+	    default double perimetruHexagon(double l) {
+	        return 6*l;
+	    }
+
+	
+
+}
+
+
+package lab5_pb2;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Figuri implements FormaGeometrica {
+	
+	static Scanner s = new Scanner(System.in);
+
+    List<Patrat> patrat = new LinkedList<>();
+    List<TriunghiEchil> triunghiechil = new LinkedList<>();
+    List<Hexagon> hexagon=new LinkedList<>();
+
+
+    public void read(int n){
+        for(int i=0; i<n; i++) {
+            
+            int optiuni = s.nextInt();
+            switch(optiuni) {
+                case 1:
+                	 addTriunghiEchil();
+                 
+                    break;
+                case 2:
+                	addPatrat();
+                    break;
+                case 3:
+                	addHexagon();
+                    break;
+            }
+        }
+    }
+        
+       
+    private void addTriunghiEchil() {
+        System.out.println("Introduceti latura triunghiului echilateral: ");
+        double latura = s.nextDouble();
+        TriunghiEchil ob = new TriunghiEchil(latura);
+        triunghiechil.add(ob);
+    }
+    
+    private void addPatrat() {
+        System.out.println("Introduceti latura patratului: ");
+        double latura = s.nextDouble();
+       Patrat ob = new Patrat(latura);
+      patrat.add(ob);
+    }
+    
+    private void addHexagon() {
+        System.out.println("Introduceti latura hexagonului: ");
+        double latura = s.nextDouble();
+       Hexagon ob = new Hexagon(latura);
+        hexagon.add(ob);
+    }
+
+      public void display() {
+    	  System.out.print("\nCe forma doriti sa vedeti?");
+    	  System.out.println("\n1.patrat\n2.triunghi echilateral\n3.hexagon" +"\n\nOptiunea ta:");
+    	  int optiuni=s.nextInt();
+    	  System.out.println();
+    	  
+    	  switch(optiuni)
+    	  {
+    	  case 1:
+    	  for(int i=0;i<patrat.size();i++) {
+    		  System.out.println("Patratul numarul: " +(i+1)+ "Aria: " +String.format("%.2f",ariaPatrat(patrat.get(i).l))
+    		  + "si perimetrul: " +String.format("%.2f",perimetruPatrat(patrat.get(i).l)));
+    		  
+    		  
+    	  }
+    	  break;
+    	  case 2:
+    		  for(int i=0;i<triunghiechil.size();i++) {
+        		  System.out.println("Triunghiul echilalateral numarul: " +(i+1)+ "Aria: " +String.format("%.2f",ariaTriunghiEchil(triunghiechil.get(i).l))
+        		  + "si perimetrul: " +String.format("%.2f",perimetruTriunghiEchil(triunghiechil.get(i).l)));
+    		  
+    		  
+    	  }
+    		  break;
+    	  case 3:
+    		  for(int i=0;i<hexagon.size();i++) {
+        		  System.out.println("Hexagonul numarul: " +(i+1)+ "Aria: " +String.format("%.2f",ariaHexagon(hexagon.get(i).l))
+        		  + "si perimetrul: " +String.format("%.2f",perimetruHexagon(hexagon.get(i).l)));
+    		  
+    		  
+    	  }
+    		  break;
+    		  default:
+    			  System.out.println("\nEroare!");
+    			  break;
+    	  }
+    	  
+      }
+}
+      
+    	  
+
+package lab5_pb2;
+
+public class Patrat {
+	double l;
+	public Patrat(double l) {
+		this.l=l;
+	}
+	
+
+}
+
+
+package lab5_pb2;
+
+public class TriunghiEchil {
+	double l;
+	public TriunghiEchil(double l) {
+		this.l=l;
+	}
+	
+
+}
+
+
+package lab5_pb2;
+
+public class Hexagon {
+	double l;
+	public Hexagon(double l) {
+		this.l=l;
+	}
+
+}
+
+      
+    	   
+      
+
+
+
+    
+  
+    
+        
+
+    
+    
+        
+    
+              
+            
+
+
+        
+
+
+    
+	
+
+

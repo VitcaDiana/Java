@@ -1,0 +1,92 @@
+//Vitca Diana,grupa 2127,lab6_pb3
+/*Definiți un pachet care declară interfața Int1 (2 variabile întregi și o metodă numita sum( ) care returnează suma a doi întregi).
+* În pachet mai există clasa Class1 (2 variabile protected de tip double, constructor, metode accesor și mutator pentru variabilele din clasă).
+* În alt fișier sursă se adaugă în același pachet o nouă interfață numită Int2 (2 variabile de tip double și o metodă numită product( ) care returnează
+* produsul a două valori de tip double).
+*Într-un fișier sursă distinct, importați tot ce conține pachetul definit anterior și definiți o clasă numită Class2 care este derivată din Class1 și care
+* implementează ambele interfețe Int1 și Int2. Instanțiați Class2 și aplicați metodele disponibile pentru a calcula suma și produsul unor variabile citite 
+*de la tastatură.*/
+
+package lab6_pb3;
+import java.util.Scanner;
+import problema3.*;
+
+public class Main {
+	static Scanner s= new Scanner(System.in);
+
+	public static void main(String[] args) {
+		System.out.println("Introduceti 2 numere: ");
+		double x,y;
+		x=s.nextDouble();
+		y=s.nextDouble();
+		Clasas2 ob=new Class2(x,y);
+		System.out.println("Suma numerelor este: " +ob.suma());
+		System.out.println("Produsul numerelor este: " +ob.inmultire());
+		
+	}
+
+}
+
+package lab6_pb3;
+import problema3.*;
+
+public class Clasa2 extends Class1 {
+	public Class2(double x,double y)
+	{
+		super(x,y);
+	}
+	public int suma()
+	{
+		return (int) (x+y);
+	}
+	public double inmultire()
+	{
+		return x*y;
+	}
+
+}
+
+
+package problema3;
+
+public abstract class Class1 implements Int1,Int2{
+	protected double x,y;
+	public Class1(double x,double y)
+	{
+		this.x=x;
+		this.y=y;
+				
+	}
+	public double getX() {
+		return x;
+	}
+	public void setX(double x) {
+		this.x=x;
+	}
+	public double getY() {
+		return y;
+	}
+	public void setY(double y) {
+		this.y=y;
+	}
+	
+
+}
+
+
+package problema3;
+
+public interface Int1 {
+	int x=0,y=0;
+	int suma();
+
+}
+
+
+package problema3;
+
+public interface Int2 {
+	double x=0,y=0;
+	double inmultire();
+
+}

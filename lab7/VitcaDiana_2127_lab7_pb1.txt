@@ -1,0 +1,40 @@
+//Vitca Diana,grupa 2127,lab7_pb1
+/*Creați o interfață denumită Generator<T> cu singura metodă next(T var). Implementați interfața pentru a permite generarea valorilor următoare în cazul 
+*aplicării asupra unor variabile de tipuri de date concrete (Integer, Character, etc.). Instanțierea clasei se va face în cadrul metodei main( ), care va fi
+* poziționată într-o clasă distinctă.*/
+
+package lab7_pb1;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Object o1=11;
+		Object o2='d';
+		
+		Class clasa=new Class();
+		 System.out.println("Obiectul: " + clasa.next(o1) + " este din  " + clasa.next(o1).getClass());
+	     System.out.println("Obiectul: " + clasa.next(o2) + " este din " + clasa.next(o2).getClass());
+
+	}
+
+}
+
+
+package lab7_pb1;
+
+public interface Generator<T> {
+	  T next(T var);
+
+}
+
+
+package lab7_pb1;
+
+public class Class implements Generator {
+	
+	public Object next(Object var) {
+		return var;
+	}
+
+}

@@ -1,0 +1,98 @@
+//Vitca Diana,grupa 2127,lab9_pb4
+/* Creați o aplicație Java ce folosește accesul sincronizat la metode pentru excludere mutuală. Creați 3 fire de execuție ce apelează simultan metode de incrementare și decrementare a unei variabile dintr-o altă clasă. Verificați dacă rezultatele sunt cele așteptate. Eliminați blocurile sincronizate și re-evaluați rezultatele.*/
+
+package lab9_pb4;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Numar val = new Numar(5);
+		ThreadIncrements u = new ThreadIncrements(val);
+		ThreadDecrements d = new ThreadDecrements(val);
+		ThreadIncrements t = new ThreadIncrements(val);
+
+		u.start();
+		d.start();
+		t.start(); // 5+4-3 = 6
+
+		System.out.println("Valoarea numarului este : " + val.val);
+	}
+
+}
+		
+
+	
+
+
+package lab9_pb4;
+
+public class ThreadDecrements extends Thread {
+	Numar valoareNumar;
+
+	public ThreadDecrements(Numar val) {
+		this.valoareNumar = val;
+	}
+
+	
+	public void run() {
+		decrement();
+	}
+
+	public void decrement() {
+		synchronized (valoareNumar.val) {
+			try {
+				valoareNumar.val -= 3;
+			} catch (Exception e) {
+				System.out.println("Thread intrerupt");
+			}
+
+		}
+	}
+
+}
+
+
+
+
+package lab9_pb4;
+
+public class ThreadIncrements extends Thread {
+	Numar valoareNumar;
+
+	public ThreadIncrements(Numar val) {
+		this.valoareNumar = val;
+	}
+
+	
+	public void run() {
+		increment();
+	}
+
+	public void increment() {
+		synchronized (valoareNumar.val) {
+			try {
+				valoareNumar.val += 2;
+			} catch (Exception e) {
+				System.out.println("Thread interrupted.");
+			}
+		}
+	}
+
+}
+
+
+
+
+
+package lab9_pb4;
+
+public class Numar {
+	Integer val;
+
+	public Numar(Integer val) {
+		this.val = val;
+	}
+}
+
+

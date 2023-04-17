@@ -1,0 +1,36 @@
+//Vitca Diana,grupa 2127,lab8_pb4
+/*Se dă un fișier binar ce conține o secvență de caractere ce reprezintă o cheie privată pentru Bitcoin (256 caractere). De la tastatură se citește o secvență de caractere ce reprezintă cheia publică a unui Bitcoin. Să se genereze identificatorul de tranzacție corespunzător acestor informații folosind operația de sau exclusiv (XOR) pe biți aplicată între cheile publică și privată. Scrieți informația rezultată într-un fișier binar*/
+
+package lab8_pb4;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileOutputStream;
+
+public class Main {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		FileInputStream in=new FileInputStream("data");
+		FileInputStream inprivat=new FileInputStream ("private");
+		FileOutputStream out=new FileOutputStream("out");
+		
+		byte buf[] =new byte[64];
+		byte buf2[]=new byte[64];
+		try {
+			while(in.read(buf) != -1 && inprivat.read(buf2) != -1) {
+				for(int i=0;i<64;i++) {
+					Byte buf3=new Byte((byte) (buf[i] ^buf2[i]));
+					out.write(buf3);
+				}
+			}
+			in.close();
+			out.close();
+			inprivat.close();
+		} catch(IOException e) {
+			System.out.println("\nEROARE!!!");
+		}
+		
+
+	}
+
+}

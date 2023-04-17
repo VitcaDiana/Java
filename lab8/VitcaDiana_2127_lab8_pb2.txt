@@ -1,0 +1,43 @@
+//Vitca Diana,grupa 2127,lab8_pb2
+/*Implementați aplicația anterioară folosind un fișier de intrare care conține un anumit număr de inregistrări cu formatul specificat mai sus.*/
+package lab8_pb2;
+import java.io.*;
+import static java.io.StreamTokenizer.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		BufferedReader obiect;
+		try {
+			obiect=new BufferedReader(new FileReader("fisier"));
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		StreamTokenizer streamtok = new StreamTokenizer(obiect);
+		try {
+			while(streamtok.nextToken() != TT_EOF) {
+				if(streamtok.ttype ==TT_WORD) {
+					System.out.println(" Sir: " +streamtok.sval);
+				} else if(streamtok.ttype ==TT_NUMBER) {
+					System.out.println("Numar: "+(int)streamtok.nval);
+				}
+			}
+			System.out.println("\n\t END OF LINE ");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+		
+				
+		
+				
+			
+		
+	
+
+	
+
+

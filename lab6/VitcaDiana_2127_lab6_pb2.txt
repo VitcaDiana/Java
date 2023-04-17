@@ -1,0 +1,61 @@
+//Vitca Diana,grupa 2127,lab6_pb2
+/*Scrieți o aplicație Java care, în cadrul metodei main( ), conține o secvență de cod care poate să lanseze excepții de tip ArithmeticException,
+* ArrayIndexOutOfBoundsException, NullPointerException, NumberFormatException și altele pe care considerați că e util să le testați.
+* Afișați în cadrul blocurilor catch mesajul generat de aceste excepții. În blocul finally, afișați mesajul ”Am prins sau nu excepții”.*/
+
+package lab6_pb2;
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main {
+
+	
+		public static void main(String[] args) {
+	        try {
+	            System.out.println("Se divide cu 0");
+	            System.out.println("Incercam impartirea lui 20 la 0. Result: ERROR");
+	            System.out.println(20/0);
+	        }
+	        catch (ArithmeticException ex) {
+	            System.out.println("S-a gasit ArithmeticException: " + ex);
+	        }
+	        finally {
+	            System.out.println("Este posibil sa existe o exceptie");
+	        }
+	        
+
+	        try {
+	            System.out.println("Se acceseaza un element.");
+	            int[] array = {11,7,3,5,1,130};
+
+	            System.out.println("Sirul: ");
+	            showArray(array);
+	            System.out.println("Se acceseaza elementul de pe pozitia a 7 a: " + array[7]);
+	        }
+	        catch (ArrayIndexOutOfBoundsException ex) {
+	            System.out.println("S-a gasit eroarea ArrayIndexOut: " + ex);
+	        }
+	        finally {
+	            System.out.println("Este posibil sa existe o exceptie");
+	        }
+	        
+
+	    }
+
+	    private static void showArray(int[] array) {
+	        for (Integer it: array) {
+	            System.out.print(it + " ");
+	        }
+	    }
+	}
+
+
+
+	 
+
+
+
+
+	 
+
+

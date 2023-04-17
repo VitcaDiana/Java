@@ -1,0 +1,62 @@
+//Vitca Diana,grupa 2127,lab6_pb4
+/*Creați o clasă derivată din Exception, numită SuperExceptie. O a doua clasă ExceptieMaiMica este derivată din SuperExceptie. 
+*În constructorii claselor afisați un mesaj ce indică excepția generată. În cadrul unei alte clase creați o metodă a( ) ce semnalizeaza (aruncă) o excepție
+* de tip ExceptieMaiMica și o metodă b( ) ce semnalizeaza o excepție de tip SuperExceptie.
+*În cadrul metodei main( ) apelați aceste metode și încercați să determinați tipul de excepție semnalizată, precum și dacă blocul catch aferent tipului de
+* exceptie ExceptieMaiMica poate prinde o SuperExcepție.*/
+
+package lab6_pb4;
+
+public class Main {
+
+	public static void main(String[] args) {
+			    Throw ob = new Throw();
+		        ob.x();
+		        ob.y();
+		    }
+		}
+
+    
+		
+package lab6_pb4;
+
+public class Throw {
+	void x() {
+		try {
+			throw new SmallerException("Eroare gasita in metoda x()");
+		} catch (SmallerException ex) {
+			ex.printStackTrace();
+		}
+	}
+	void y() {
+		try {
+			throw new SuperException("Eroare gasita in metoda y()");
+		} catch (SuperException ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+
+}
+
+
+package lab6_pb4;
+
+public class SmallerException extends SuperException {
+	public SmallerException(String message) 
+	{
+		super(" EROARE SmallerException");
+	}
+
+}
+
+
+package lab6_pb4;
+
+public class SuperException extends Exception {
+	public SuperException(String message) 
+	{
+		super("EROARE SuperException");
+	}
+
+}

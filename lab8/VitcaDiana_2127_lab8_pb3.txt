@@ -1,0 +1,142 @@
+//Vitca Diana,grupa 2127,lab8_pb3
+/*Se citesc de la tastatură date formatate sub forma DD/MM/YYYY. Să se afișeze sub forma DD luna YYYY, unde luna este forma expandată a MM și de asemenea să se afișeze și dacă anul este bisect. Programul se oprește prin apăsarea tastei X sau x. Puteti folosi si clasa DateFormatSymbols pentru conversia lunii.*/
+
+package lab8_problema3;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
+import java.text.NumberFormat;
+
+public class Main {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		try {
+			BufferedReader bufreader=new BufferedReader (new InputStreamReader(new FileInputStream("file")));
+			StreamTokenizer streamtok=new StreamTokenizer (bufreader);
+			streamtok.whitespaceChars('/', '/');
+			streamtok.wordChars(' ', ' ');
+			int iterator=0;
+			NumberFormat nf=NumberFormat.getInstance();
+			nf.setGroupingUsed(false);
+			while(streamtok.ttype != StreamTokenizer.TT_EOF) {
+				int token=streamtok.nextToken();
+				if(token ==StreamTokenizer.TT_NUMBER) {
+					if(iterator == 1) {
+						int x=(int) streamtok.nval;
+						getLunaTa(x);
+					}
+						else {
+							if(iterator == 0) {
+								if(streamtok.nval <10) {
+									System.out.print("0" +nf.format(streamtok.nval) +" ");
+								}
+								else
+									System.out.print(nf.format(streamtok.nval) + " ");
+								
+							}
+							else
+							{
+								System.out.print(nf.format(streamtok.nval));
+								AnBisect((int)streamtok.nval);
+							}
+						}
+						iterator++;
+						if(iterator>2) {
+							iterator=0;
+							System.out.print("\n");
+							
+						}
+					}
+				}
+				System.out.print("\nEOF");
+				
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			exitProgram();
+			
+		}
+		
+		public static void getLunaTa(int x) {
+			switch(x) {
+				case 1: 
+					System.out.println("Ianuarie ");
+					break;
+				case 2:
+					System.out.println(" Februarie ");
+					break;
+				case 3:
+					System.out.println(" Martie ");
+					break;
+				case 4:
+					System.out.println(" April ");
+					break;
+				case 5:
+					System.out.println(" Mai ");
+					break;
+				case 6:
+					System.out.println(" Iunie ");
+					break;
+				case 7:
+					System.out.println(" Iulie ");
+					break;
+				case 8:
+					System.out.println(" August ");
+					break;
+				case 9:
+					System.out.println(" Septembrie ");
+					break;
+				case 10:
+					System.out.println(" Octombrie ");
+					break;
+				case 11:
+					System.out.println(" Noiembrie ");
+					break;
+				case 12:
+					System.out.print(" Decembrie ");
+					break;
+					default:
+						System.out.print(" Luna invalida ");
+						break;
+					
+			}
+		}
+		public static void exitProgram() {
+			System.out.println("\nApasati x pentru a iesi din program ");
+			Scanner s=new Scanner(System.in);
+			System.out.print("Input: ");
+			String cheie=s.next();
+			while(!cheie.equalsIgnoreCase("X")) {
+				System.out.print("\nIncercati din nou \nInput: ");
+				cheie=s.next();
+				
+			}
+			System.out.print("Program terminat");
+		}
+		
+		public static void AnBisect(int an) {
+			boolean ba=false;
+			if(an %4==0) {
+				if(an %100==0) {
+					if(an % 400 ==0)
+						ba=true;
+					else
+						ba=false;
+				}
+				else
+					ba=true;
+				
+			}
+			else {
+				ba=false;
+		}
+		if(ba==true)
+			System.out.print("\n" +an +" este un an bisect\n");
+		
+	}
+
+}

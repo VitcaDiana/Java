@@ -1,0 +1,52 @@
+//Vitca Diana,grupa 2127,lab6_pb1
+/*Scrieti un program Java care defineste un sir de valori de tip double care vor fi citite de la tastatura. Tratati exceptia data de accesarea unui element
+* cu index negativ sau mai mare decat indexul ultimului element din sir (ArrayIndexOutOfBoundsException). Afisati un mesaj corespunzator in momentul 
+*detectarii exceptiei. Considerati o matrice (cu numar de coloane fix pentru fiecare linie) si tratati exceptia posibil a aparea. Considerati si cazul
+* in care matricea are numar diferit de coloane la fiecare linie.*/
+
+package lab6_pb1;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Double array[] = new Double[10];
+        array = readArray();
+        valueAt(9,array);
+    }
+
+    static Double[] readArray() {
+        Scanner s = new Scanner(System.in);
+        try {
+            System.out.println("Adaugati numarul de elemente: ");
+            int n = s.nextInt();
+            s.nextLine();
+
+           
+            Double[] temp = new Double[n];
+            System.out.println("Elementele: ");
+            for (int i = 0; i < n; i++) {
+                temp[i] = s.nextDouble();
+            }
+            return temp;
+
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+        } finally {
+            System.out.println("Poate exista exceptie.");
+        }
+        Double[] arrayForExits = {0.0};
+        return arrayForExits;
+    }
+
+    static void valueAt(int index, Double[] array) {
+        try{
+            if(index<0) throw new ArrayIndexOutOfBoundsException("Nu pot exista termeni negativi");
+            else if(index <=array.length) System.out.println("Indexul" + index + " este " + array[index]);
+            else throw new ArrayIndexOutOfBoundsException("Nu pot exista mai mult de 10 termeni");
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
