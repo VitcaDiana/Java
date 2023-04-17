@@ -1,0 +1,87 @@
+//Vitca Diana,grupa 2127,lab10_pb2
+/*Scrieți o aplicație de tip Frame care va desena într-un Canvas un cerc de culoare roșie tangent la dimensiunea cea mai mică (înălțime, lățime) a componentei Canvas.*/
+
+package lab10_pb2;
+import java.awt.Canvas;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Frame {
+	public static void main(String args[ ]) {
+		MyFrame frame = new MyFrame("Cerc");
+	}
+}
+
+
+
+package lab10_pb2;
+import java.awt.Canvas;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+
+class MyFrame extends Frame {
+	private static final long serialVersionUID = 1L;
+	MyFrame(String titlu){
+	super(titlu);
+	MyCanvas canvas=new MyCanvas(150,100);
+	add(canvas);
+	setLayout(new FlowLayout());
+	this.addWindowListener(new ExitListener());
+	setSize(200, 200);
+	setVisible(true);
+	}
+}	
+	
+	
+	
+	
+	
+	
+package lab10_pb2;
+import java.awt.Canvas;
+import java.awt.*;
+import java.awt.event.*;
+
+class MyCanvas extends Canvas{
+	private static final long serialVersionUID = 1L;
+	Graphics h;
+	int a, b;
+	MyCanvas(int a, int b){
+		this.a=a;
+		this.b=b;
+		this.setSize(new Dimension(a, b));
+		this.setBackground(Color.blue);
+	}
+	
+	public void paint(Graphics h) {
+		h.setColor(Color.red);
+		if(a>b) {
+		h.fillOval(0, 10, 50, 50);
+		}
+		
+	}
+}
+
+
+
+package lab10_pb2;
+import java.awt.Canvas;
+import java.awt.*;
+import java.awt.event.*;
+
+class ExitListener extends WindowAdapter {
+	
+	 public void windowClosing(WindowEvent event) {
+	 System.exit(0);
+	}
+}

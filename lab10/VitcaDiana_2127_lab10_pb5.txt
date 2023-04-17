@@ -1,0 +1,51 @@
+//Vitca Diana,grupa 2127,lab10_pb5
+/*Scrieți o aplicație Java de tip Frame care desenează un cerc colorat în toate culorile posibile. Se va începe cu culoarea roșie, tranzițiile dintre culori trebuie să fie line, iar cercul este redesenat pe măsură ce culorile sunt generate.*/
+
+package lab10_pb5;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.*;
+
+public class Culoare extends Frame {
+
+	private static final long serialVersionUID = 1L;
+
+	public void paint(Graphics graphics) {
+		try {
+			Thread.sleep(50);
+			for (int r = 255; r >= 0; r -= 25) {
+				try {
+					Thread.sleep(50);
+					for (int g = 255; g >= 0; g -= 25) {
+						for (int b = 255; b >= 0; b -= 15) {
+							try {
+								Thread.sleep(50);
+								graphics.setColor(new Color(r, g, b));
+								graphics.fillOval(0, 0, getSize().width, getSize().height);
+							} catch (InterruptedException ex) {
+								System.out.println("Program inchis!");
+							}
+						}
+					}
+				
+			
+				} catch (InterruptedException ex) {
+					System.out.println("Program inchis!");
+					
+				}
+			}
+		} catch (InterruptedException er) {
+			System.out.println("Program inchis!");
+		}
+	}
+}
