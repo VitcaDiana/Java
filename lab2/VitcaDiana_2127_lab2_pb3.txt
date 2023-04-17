@@ -1,0 +1,33 @@
+//Vitca Diana grupa  2127 lab2_pb3
+//Scrieti o aplicatie Java in care se citesc de la tastatura 2 valori intregi si se afiseaza
+// cmmdc-ul valorilor
+package lab2_pb3;
+import  java.util.Scanner;
+
+public class Cmmdc {
+
+	public static void main(String[] args) {
+	   int  nr1,  nr2;
+      
+       System.out.print("Introduceti  primul  numar:  ");
+       
+       nr1  =  new Scanner(System.in).nextInt();
+      
+       System.out.print("Introduceti  al  doilea  numar:  ");
+      
+       nr2  =  new Scanner(System.in).nextInt();
+      
+       while  (  nr1  !=  nr2) 
+       {
+               if(nr1  >  nr2)
+                       nr1 =  nr1  -  nr2;
+               else
+                       nr2 =  nr2  -  nr1;
+       }
+      
+      
+       System.out.println("CMMDC  este: "  +  nr1 );
+
+	}
+
+}

@@ -1,0 +1,32 @@
+//Vitca Diana grupa  2127 lab2_pb5
+//Scrieti o aplicatie Java in care cititi de la tastatuta mai multe numere intregi si 
+//verificati daca sunt numere prime. Numarul de valori citite este preluat de la tastatura 
+//sau din linia de comanda.
+
+package lab2_pb5;
+import  java.util.Scanner;
+
+
+public class Prim {
+
+	public static void main(String[] args) {
+		int n,nr,i=2,prim=1,j;
+		System.out.print("Introduceti cate numere se citesc de la tastatura: ");
+		n=new Scanner(System.in).nextInt();
+		for(j=1; j <= n; j++)
+		{
+			System.out.print("Introduceti numarul "  +j);
+			nr= new Scanner(System.in).nextInt();
+		while(i <= nr/2)
+		{
+			if(nr%i == 0) prim=0;
+			i++;
+		}
+		if(prim ==1) System.out.println( nr+ " Este numar prim!" );
+		else System.out.println( nr+  " Nu este numar prim!" );
+			
+		}
+
+	}
+
+}

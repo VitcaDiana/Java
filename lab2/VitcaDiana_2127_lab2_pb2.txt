@@ -1,0 +1,20 @@
+//Vitca Diana grupa  2127 lab2_pb2
+//Scrieti o aplicatie Java in care cititi de la tastatura o valoare intreaga si se afiseaza
+// factorialul numarului citit.
+package lab2_pb2;
+import  java.util.Scanner;
+
+public class Lab2pb2 {
+
+	public static void main(String[] args) {
+		int n, i, f=1;
+		System.out.print("Introduceti un numar: ");
+		n=new Scanner(System.in).nextInt();
+		
+		for(i=1; i <= n; i++)
+			f=f*i;
+		
+      System.out.println("Factorialul numarului " +n+ " este: " +f );
+	}
+
+}
