@@ -1,0 +1,69 @@
+//Vitca Diana grupa 2127 lab4_pb2
+/*Definiți o clasă X care va avea ca atribute un șir de caractere privat, un obiect de tip 
+*String cu specificatorul protected și un întreg fără specificator de acces. Clasa va conține
+* un constructor explicit cu parametri, care va inițializa atributele, metode accesor și 
+*mutator pentru câmpurile care nu pot fi accesate din afara clasei și va redefini metoda
+* finalize() moștenită din clasa Object, care va afișa un mesaj corespunzător.
+*În metoda main(), plasată în altă clasă, creați un obiect din clasa X, afișați valorile
+* atributelor, apoi pregătiți obiectul pentru a fi eliminat de garbage collector. 
+*Creați apoi un nou obiect X, modificați valorile atributelor și afișați pe ecran valorile
+ acestora.*/
+
+package lab4_problema2;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.print("Introduceti un sir: ");
+		String sg=s.next();
+		System.out.print("Introduceti 5 caractere: ");
+		char[] array=new char[5];
+		for(int i=0;i<5;i++)
+		{
+			array[i]=s.next().charAt(0);	
+			
+		}
+		System.out.print("Introduceti un numar: ");
+		int nr=s.nextInt();
+		X ob=new X(sg,array,nr);
+		System.out.print("Valorile sunt: " + ob.nr + "," + ob.sg + "," + Arrays.toString(ob.getArray()));
+		ob=null;
+		System.gc();
+		
+		
+
+	}
+
+}
+
+
+
+package lab4_problema2;
+
+public class X {
+	protected String sg;
+	private char[] array;
+	int nr;
+	
+	public X(String sg,char[] array,int nr)
+	{
+		this.sg=sg;
+		this.array=array;
+		this.nr=nr;
+	}
+	protected void finalize() throws Throwable{
+		System.out.println("\nObiect colectat: " +this);
+	}
+	public char[] getArray()
+	{
+		return array;
+	}
+	public void setArray(char[] array)
+	{
+		this.array=array;
+	}
+
+}
