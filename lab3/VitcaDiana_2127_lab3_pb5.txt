@@ -1,0 +1,50 @@
+//Vitca Diana grupa 2127 lab3_pb5
+/*Implementati algoritmii cunoscuti de ordonare a sirurilor numerice
+ *(bubble sort, insertion sort, quick sort, etc.) si aplicati-i asupra unui sir de 
+ *valori intregi citite de la tastatura */
+package lab3_pb5;
+import java.util.Scanner;
+import java.util.Arrays;
+public class BubbleSort {
+    
+	public static void main(String[] args) {
+		int[] sir= {25, 74, 16, 42, 12, 35, 57};
+		System.out.print("Secventa originala este: ");
+		for(int i=0; i<sir.length;i++)
+		{
+			System.out.print(sir[i] + " , ");
+		}
+		System.out.println();
+		
+		SortEm(sir);
+	}
+		private static void SortEm (int [] ar) {
+		
+		int t;
+		for(int i=ar.length -1 ;i>0;i--)
+		{
+			for(int j=0;j<i;j++)
+			{
+				if(ar[j] > ar[j+1])
+				{
+					t=ar[j];
+					ar[j]=ar[j+1];
+					ar[j+1]=t;
+				}
+			}
+		}
+		System.out.print("Noua secventa este: ");
+		for(int i=0;i<ar.length;i++)
+		{
+			System.out.print(ar[i] + " , ");
+		}
+		System.out.println();
+	
+	  
+	
+	   
+	    
+	
+	}
+
+}

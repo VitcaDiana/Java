@@ -1,0 +1,27 @@
+//Vitca Diana grupa 2127 lab3_pb6
+/*Scrieti un program Java care genereaza 2 valori aleatoare si efectueaza asupra lor
+ *  cateva operatii matematice.*/
+package lab3_pb6;
+import java.util.Scanner;
+import java.util.Random;
+public class Lab3pb6 {
+	 static  Scanner in=new  Scanner(System.in);
+	public static void main(String[] args) {
+		Random  rand  =  new  Random();
+        int  n1  =  rand.nextInt(100);
+        int  n2  =  rand.nextInt(100);
+        int  suma  =  0,  produs  =  1, scadere = 0, impartire = 0;
+        suma  =  n1  +  n2;
+        scadere = n1 - n2;
+        produs  = n1  *  n2;
+        impartire =n1 / n2;
+        System.out.println("Numerele  sunt:  "  +  n1  +  "  si  "  +  n2);
+        System.out.println("Suma  numerelor  este:  "  +  suma);
+        System.out.println("Produsul  numerelor  este:  "  +  produs);
+        System.out.println("Scaderea  numerelor  este:  "  +  scadere);
+        System.out.println("Impartirea  numerelor  este:  "  +  impartire);
+
+
+	}
+
+}

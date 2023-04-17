@@ -1,0 +1,25 @@
+//Vitca Diana grupa 2127 lab3_pb4
+/*Scrieti o aplicatie Java care defineste o valoare intreaga si apoi afiseaza reprezentarea
+* ei binară, octală și hexazecimală. Scrieți metode de conversie a valorii citite în diferite
+* baze de numeratie.*/
+package lab3_pb4;
+import java.util.Scanner;
+public class Lab3pb4 {
+	
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		System.out.print("Introduceti o valoare: ");
+		int n=scanner.nextInt();
+		
+    	System.out.println(n + " in baza 2 : " + Integer.toBinaryString(n));
+    	 
+    	
+    	System.out.println(n + " in baza 8 : " + Integer.toOctalString(n));
+    	 
+    	
+    	System.out.println(n + " in baza 16 : " + Integer.toHexString(n));
+		
+
+	}
+
+}

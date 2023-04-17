@@ -1,0 +1,36 @@
+//Vitca Diana grupa 2127 lab4-pb6
+/*Definiți un șir unidimensional de valori de tip char, având numărul mai mic sau cel mult 
+*egal cu un n citit de la tastatură. Fiecare valoare conține valori alfa-numerice generate 
+*aleator. Transformați șirul de caractere într-un obiect de tip String. Afișați valoarea
+* inițială și apoi valoarea obținută prin înlocuirea fiecărui caracter numeric cu ‘*’.*/
+package lab4_pb6;
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		System.out.println("Introduceti dimensiunea sirului: ");
+		int dimensiune = s.nextInt();
+		String string = randomString(dimensiune);
+		System.out.println("Sirul initial este: " + string);
+
+		string = string.replaceAll("[0-9]", "*");
+		System.out.println("Sirul dupa eliminarea numerelor: " + string);
+	}
+
+	private static String randomString(int length) {
+		String literenr = "abcdefghijklmnopqrstuvwxyz1234567890";
+		char[] string = new char[length];
+		for (int i = 0; i < length; i++) {
+			int rand = (int) (Math.random() * literenr.length());
+			string[i] = literenr.charAt(rand);
+		}
+		return new String(string);
+	}
+
+
+	}
+
+

@@ -1,0 +1,27 @@
+//Vitca Diana grupa 2127 lab3_pb2
+/*Cititi un sir de caractere de la intrarea standard. Transformati sirul intr-un tablou 
+ * de caractere. Cautati in acest tablou un caracter specificat in program. 
+ * Afisati numarul de aparitii. */
+
+
+package lab3_pb2;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Tablou {
+	private static  Scanner  in=new  Scanner(System.in); 
+	public static void main(String[] args) {
+		int i,j=0;
+		System.out.print("Introduceti un sir de caractere: ");
+		String sir =in.next();
+		char [] x =sir.toCharArray();
+		System.out.print("Introduceti caracterul pe care doriti sa il cautati in sir: ");
+		String caracter =in.next();
+		for( i=0;i<x.length;i++)
+		
+			if(caracter.charAt(0) == x[i])
+				j++;
+		
+		System.out.println("Caracterul " + caracter+ " apare in sir de " + j);
+	}
+}

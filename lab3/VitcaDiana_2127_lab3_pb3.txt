@@ -1,0 +1,23 @@
+/Vitca Diana grupa 2127 lab3_pb3
+/*Pornind de la problema precedenta, copiati primele 3 caractere din sir intr-un alt 
+ * tablou si afisati rezultatul obtinut (folositi metoda arraycopy() din clasa System) */
+
+package lab3_pb3;
+import java.util.Scanner;
+
+public class Sir {
+	static  Scanner in=new  Scanner(System.in);
+	public static void main(String[] args) {
+		int a[] = {5,1,1,2,3,5,9}; 
+        int b[] = new int[3]; 
+  
+        System.arraycopy(a, 0, b, 0, 3); 
+ 
+        System.out.println("Sirul b este: "); 
+        for (int i=0; i<3; i++) 
+            System.out.print(b[i]); 
+	
+
+	}
+
+}
